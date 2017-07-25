@@ -28,7 +28,7 @@ if any encounter error "pip is not recognized as an internal command .." install
 
 2)  Under repository directory in command prompt, create virtual environment for repository:
 
-        mkvirtualenv todolist
+        mkvirtualenv tasks
         
     you will see virtual environment name created in bracket on the next directory
     
