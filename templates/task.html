@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head-title %}
+task handler
+{% endblock %}
+
+{% block custom_css %}
+<style>
+  body, html {
+    background: url("{% static "images/wallpaper-background.jpg" %}");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="welcome text-center header-title">Your Every Tasks</h1>
+        <div class="card card-container">
+
+          <div class="center-align">
+            <a href="{% url "tasker:task-add" %}" class="btn btn-primary custom-add-button">Add Tasks <i class="fa fa-plus"></i> </a>
+          </div>
+
+          {% if user.is_authenticated %}
+          Hi, {{user.username}}
+          <a href="{% url 'auth:logout' %}" class="btn btn-default">logout <i class="fa fa-sign-out fa-1x"></i> </a>
+          {% endif %}
+
+          <table class="table table-hover">
+            <thead>
+              {% if all_task %}
+              <tr>
+                <th>Task name</th>
+                <th>Task description</th>
+                <th>Created date</th>
+                <th>Updated date</th>
+                <th>Action</th>
+              </tr>
+              {% else %}
+                <p style="text-align:center; margin-top:150px; margin-bottom:150px;">No task added. Please add the task by clicking on the Add Task button above</p>
+              {% endif %}
+            </thead>
+            <tbody>
+            {% for element in all_task %}
+              <tr>
+                <td>{{ element.name}}</td>
+                <td>{{ element.description }}</td>
+                <td>{{ element.dateCreated }}</td>
+                <td>{{ element.dateUpdated }}</td>
+                <td>
+                  <div class="absolute">
+                  <a href="{% url "tasker:task-edit" element.id %}"><i class="fa fa-pencil fa-1x push-to-the-right"></i></a>
+                  <button type="button" data-toggle="modal" data-target="#myModal{{element.id}}"><i class="fa fa-trash fa-1x"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Modal -->
+        <div class="modal fade" id="myModal{{element.id}}" role="dialog">
+          <div class="modal-dialog">
+
+              <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Task Name: {{element.name}}</h4>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete it?</p>
+              </div>
+              <div class="modal-footer">
+                <a class="btn btn-default" href="{% url "tasker:task-delete" element.id %}">Yes, Delete it</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+            {% endfor %}
+
+            </tbody>
+          </table>
+
+          {% if is_paginated %}
+          <div class="pagination center-align">
+            <span class="step-links">
+            {% if page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}">< previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next ></a>
+            {% endif %}
+            </span>
+          </div>
+          {% endif %}
+
+        </div><!-- /card-container -->
+</div><!-- /container -->
+{% endblock %}

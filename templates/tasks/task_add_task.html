@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head-title %}
+Add Task
+{% endblock %}
+
+{% block custom_css %}
+<style>
+  body, html {
+    background: url("{% static "images/wallpaper-background.jpg" %}");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="welcome text-center header-title">Create your Task</h1>
+        <div class="card card-container">
+          <a class="btn btn-link" style="margin-top:20px;" href="{% url "tasker:task-user" %}"><< Go Back</a>
+          <form style="margin-top:20px;" action="." method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-default" style="width:200px;" type="submit" value="Add" />
+          </form>
+
+        </div><!-- /card-container -->
+</div><!-- /container -->
+{% endblock %}
