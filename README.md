@@ -49,7 +49,7 @@ if any encounter error "pip is not recognized as an internal command .." install
         
 automatically, server will running. open the browser, type:
 
-        localhost:8000/users/todolist
+        localhost:8000
         
 ## License
 
