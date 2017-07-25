@@ -51,6 +51,15 @@ automatically, server will running. open the browser, type:
 
         localhost:8000
         
+### How it works
+There are four activity that user can run through it,
+*       Add Task - User can add their new tasks
+*       Edit Task - User can edit their existing tasks
+*       Delete Task - User can delete their existing tasks
+*       List Task - User can view their current and existing tasks
+
+
+        
 ## License
 
 Free to use and distribute
