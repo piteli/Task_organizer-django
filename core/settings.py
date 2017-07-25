@@ -86,7 +86,7 @@ DATABASES = {
         'USER': 'task_user',
         'PASSWORD': 'task_pass',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
 
     }
 }
