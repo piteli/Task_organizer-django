@@ -53,10 +53,10 @@ automatically, server will running. open the browser, type:
         
 ### How it works
 There are four activity that user can run through it,
-*       Add Task - User can add their new tasks
-*       Edit Task - User can edit their existing tasks
-*       Delete Task - User can delete their existing tasks
-*       List Task - User can view their current and existing tasks
+* Add Task - User can add their new tasks
+* Edit Task - User can edit their existing tasks
+* Delete Task - User can delete their existing tasks
+* List Task - User can view their current and existing tasks
 
 
         
