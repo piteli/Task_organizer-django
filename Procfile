@@ -1,1 +1,1 @@
-web : gunicorn soding_assign.wsgi --log-file -
+web : gunicorn core.wsgi --log-file -
