@@ -86,7 +86,7 @@ DATABASES = {
         'USER': 'task_user',
         'PASSWORD': 'task_pass',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5000',
 
     }
 }
@@ -138,5 +138,5 @@ STATIC_ROOT = os.path.join(os.path.join(BASE_DIR, 'staticfiles'))
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 import dj_database_url
-db_from_env = dj_database_url.config()
+db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
