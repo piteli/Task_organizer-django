@@ -133,4 +133,4 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
-STATIC_ROOT = "/static/"
+STATIC_ROOT = "/var/static/"
