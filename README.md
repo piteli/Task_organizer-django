@@ -51,6 +51,18 @@ automatically, server will running. open the browser, type:
 
         localhost:8000
         
+### How it works
+There are four activity that user can run through it,
+* Add Task - User can add their new tasks. The task form will ask for valid task name and description.
+* Edit Task - User can edit their existing tasks. The task form will ask for valid task name and description.
+* Delete Task - User can delete their existing tasks. Once the task been deleted, it wont show under the tasks added list.
+* List Task - User can view their current and existing tasks.
+
+When user run the web app for the first time, the web app response with prompt login and register form for full web app access.
+After user login or register, it will redirect to task page which can perform add,delete,edit and view all tasks.
+
+
+        
 ## License
 
 Free to use and distribute
