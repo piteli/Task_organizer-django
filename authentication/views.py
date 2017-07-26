@@ -11,15 +11,19 @@ class LoginController(View):
         username = request.POST['username']
         password = request.POST['password']
 
-        user = authenticate(username=username, password=password)
+        try:
+            user = authenticate(username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            request.session['user_id'] = user.id
-            return HttpResponseRedirect(reverse('tasker:task-user'))
+            if user is not None:
+                login(request, user)
+                request.session['user_id'] = user.id
+                return HttpResponseRedirect(reverse('tasker:task-user'))
 
-        else:
-            return HttpResponse("wrong credentials, please try again <a href='/'>go back</a>")
+            else:
+                return HttpResponse("wrong credentials, please try again <a href='/'>go back</a>")
+
+        except:
+            raise HttpResponseServerError()
 
 
 class RegisterController(View):
@@ -32,9 +36,14 @@ class RegisterController(View):
         try:
             user = User.objects.create_user(username = username, email = email, password = password)
             user.save()
+            get_login = authenticate(username = username, password = password)
+
+            if get_login is not None:
+                login(request, get_login)
+                request.session['user_id'] = user.id
 
         except:
-            raise Http404
+            raise HttpResponseServerError()
 
         else:
             return HttpResponseRedirect(reverse('tasker:task-user'))

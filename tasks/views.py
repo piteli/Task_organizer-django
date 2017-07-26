@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, View, FormView
 from .models import Task
 from .forms import AddTaskForm, UpdateTaskForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseServerError
 from django.core.urlresolvers import reverse, reverse_lazy
 import datetime
 from django.views.generic.edit import CreateView, UpdateView
@@ -39,17 +39,44 @@ class TaskCreate(CreateView):
     model = Task
     form_class = AddTaskForm
     template_name_suffix = '_add_task'
-    success_url = reverse_lazy('tasker:task-user')
 
-    def get_initial(self):
-        return {'dateCreated' : datetime.datetime.now().date(), 'user_id': self.request.session['user_id'] }
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST['name']
+        desc = request.POST['description']
+
+        try:
+            form = Task.objects.create(name=name, description=desc)
+            form.dateCreated = datetime.datetime.now().date()
+            form.user_id = self.request.session['user_id']
+            form.save()
+
+        except:
+            raise HttpResponseServerError()
+
+        else:
+            return HttpResponseRedirect(reverse('tasker:task-user'))
+
 
 
 class TaskUpdate(UpdateView):
     model = Task
     form_class = UpdateTaskForm
     template_name_suffix = '_update_task'
-    success_url = reverse_lazy('tasker:task-user')
 
-    def get_initial(self):
-        return {'dateUpdated' : datetime.datetime.now().date()}
+    def post(self, request, *args, **kwargs):
+        name = request.POST['name']
+        desc = request.POST['description']
+
+        try:
+            form = Task.objects.get(pk = self.kwargs['pk'])
+            form.name = name
+            form.description = desc
+            form.dateUpdated = datetime.datetime.now().date()
+            form.save()
+
+        except:
+            raise HttpResponseServerError()
+
+        else:
+            return HttpResponseRedirect(reverse('tasker:task-user'))

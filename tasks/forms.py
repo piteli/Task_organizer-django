@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 class AddTaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ['name','description','dateCreated','user_id']
+        fields = ['name','description']
         labels = {
                 'name':_('Task Name'),
                 'description':_('Task description'),
@@ -14,15 +14,14 @@ class AddTaskForm(ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description' : forms.Textarea(attrs={'class': 'form-control'}),
-            'dateCreated' : forms.HiddenInput(),
-            'user_id' : forms.HiddenInput(),
                     }
+
 
 class UpdateTaskForm(ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name','description','dateUpdated']
+        fields = ['name','description']
         labels = {
                 'name':_('Task Name'),
                 'description':_('Task description'),
@@ -30,5 +29,4 @@ class UpdateTaskForm(ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description' : forms.Textarea(attrs={'class': 'form-control'}),
-            'dateUpdated' : forms.HiddenInput(),
                     }
