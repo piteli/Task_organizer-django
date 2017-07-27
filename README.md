@@ -9,6 +9,7 @@ on each instruction, I set environment and running server using windows OS comma
 In this repository, I created with:
 *   [Django](https://www.djangoproject.com/) - web framework
 *   [Python 3](https://www.python.org/) - programming language
+*   [PostgreSQL](https://www.postgresql.org/) - the database
 And some frequently used stuff like html, css, and jquery
 
 ### Prerequisite
